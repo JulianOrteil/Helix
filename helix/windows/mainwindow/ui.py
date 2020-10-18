@@ -377,7 +377,7 @@ class Ui_Helix(object):
         self.topbar = QFrame(self.central_widget)
         self.topbar.setFrameShadow(QFrame.Raised)
         self.topbar.setFrameShape(QFrame.StyledPanel)
-        self.topbar.setMinimumHeight(QSize(0, 45))
+        self.topbar.setMinimumSize(QSize(0, 45))
         self.topbar.setObjectName("topbar")
 
         size_policy = QSizePolicy(
@@ -398,7 +398,7 @@ class Ui_Helix(object):
         # Create the Helix logo
         self.helix_logo = QLabel(self.topbar)
         self.helix_logo.setAlignment(Qt.AlignCenter)
-        self.helix_logo.setMinimumHeight(QSize(45, 45))
+        self.helix_logo.setMinimumSize(QSize(45, 45))
         self.helix_logo.setObjectName("helix_logo")
         self.helix_logo.setPixmap(QPixmap(":/images/images/helix_icon_sml.png"))
         self.helix_logo.setScaledContents(True)
@@ -449,11 +449,11 @@ class Ui_Helix(object):
         self.maximize_btn = QToolButton(self.topbar)
 
         icon = QIcon()
-        icon.addPixmap(QPixmap(
-            ":/images/images/maximize_icon.png",
+        icon.addPixmap(
+            QPixmap(":/images/images/maximize_icon.png"),
             QIcon.Normal,
             QIcon.Off
-        ))
+        )
 
         self.maximize_btn.setIcon(icon)
         self.maximize_btn.setIconSize(QSize(20, 20))
@@ -465,11 +465,11 @@ class Ui_Helix(object):
         self.close_btn = QToolButton(self.topbar)
 
         icon = QIcon()
-        icon.addPixmap(QPixmap(
-            ":/images/images/close_icon.png",
+        icon.addPixmap(
+            QPixmap(":/images/images/close_icon.png"),
             QIcon.Normal,
             QIcon.Off
-        ))
+        )
 
         self.close_btn.setIcon(icon)
         self.close_btn.setIconSize(QSize(20, 20))
@@ -500,7 +500,7 @@ class Ui_Helix(object):
 
         size_policy = QSizePolicy(
             QSizePolicy.Expanding,
-            QSizePolicy.ExpandFlag
+            QSizePolicy.Expanding
         )
         size_policy.setHorizontalStretch(42)
         size_policy.setHeightForWidth(self.main_content.sizePolicy().hasHeightForWidth())
@@ -663,7 +663,7 @@ class Ui_Helix(object):
         # self.content_bar_layout.addWidget(self.open_dataset_btn)
         # self.content_bar_layout.addWidget(self.next_image_btn)
         # self.content_bar_layout.addWidget(self.previous_image_btn)
-        self.content_bar_layout.addWidget(self.content_bar_spacer)
+        self.content_bar_layout.addItem(self.content_bar_spacer)
 
         # Add the widgets to the main content layout
         self.main_content_layout.addWidget(self.content_bar)
