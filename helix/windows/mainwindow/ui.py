@@ -322,9 +322,7 @@ class Ui_Helix(object):
         # Create the Helix logo text
         self.helix_logo_text = QLabel(self.topbar)
         self.helix_logo_text.setAlignment(
-            Qt.AlignLeading | \
-            Qt.AlignLeft | \
-            Qt.AlignVCenter
+            Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter
         )
 
         font = QFont()
