@@ -55,6 +55,66 @@ from PyQt5.QtWidgets import (
 
 
 class Ui_Helix(object):
+    """Contains the widgets used in the main window of the application.
+
+    Call :meth:`setup_ui` to build the widgets used in the window.
+
+    Attributes:
+        central_widget (:obj:`QWidget`):
+            The container widget of everything in the window.
+        central_layout (:obj:`QGridLayout`):
+            The primary layout organizing each component of the window.
+        navbar (:obj:`navbar`):
+            The widget containing each button navigating to the
+            different modes of the application.
+        navbar_layout (:obj:`navbar_layout`):
+            The layout organizing each button of the navbar.
+        home_btn (:obj:`QToolButton`):
+            The button, when clicked, redirecting the user to the home
+            window.
+        annotation_btn (:obj:`QToolButton`):
+            The button, when clicked, redirecting the user to the
+            annotation window.
+        train_btn (:obj:`QToolButton`):
+            The button, when clicked, redirecting the user to the model
+            train window.
+        eval_btn (:obj:`QToolButton`):
+            The button, when clicked, redirecting the user to the
+            evaluation window.
+        navbar_spcaer (:obj:`QSpacerItem`):
+            The spacer pushing all buttons to the top of the navbar.
+        topbar (:obj:`QFrame`):
+            The topbar containing the application logo and the minimize,
+            maximize, and close buttons.
+        topbar_layout (:obj:`topbar_layout`):
+            The layout organizing each widget of the topbar.
+        helix_logo (:obj:`QLabel`):
+            The widget containing the double helix part of the logo.
+        helix_logo_text(:obj:`QLabel`):
+            The widget containing the 'HELIX' part of the logo.
+        topbar_spcaer (:obj:`QSpacerItem`):
+            The spacer pushing the logo and buttons apart.
+        minimize_btn (:obj:`QToolButton`):
+            The button minimizing the application.
+        maximize_btn (:obj:`QToolButton`):
+            The button maximizing the application.
+        close_btn (:obj:`QToolButton`):
+            The button closing the application.
+        main_content (:obj:`QFrame`):
+            The content container for each separate window.
+        main_content_layout (:obj:`QHBoxLayout`):
+            The layout organizing each window.
+        content_bar (:obj:`QFrame`):
+            The widget between the navbar and content container hosting
+            each button for each window.
+        content_bar_layout (:obj:`QVBoxLayout`):
+            The layout organizing each button for each window.
+        content_bar_spacer (:obj:`QSpacerItem`):
+            The spcaer pushing each menu button to the top of the
+            content_bar.
+        content (:obj:`QLabel`):
+            A default content window. Meant to be replaced.
+    """
 
     central_widget: QWidget
     central_layout: QGridLayout
@@ -78,13 +138,13 @@ class Ui_Helix(object):
 
     main_content: QFrame
     main_content_layout: QHBoxLayout
-    menubar: QFrame
-    menubar_layout: QVBoxLayout
-    open_file_btn: QToolButton
-    open_dataset_btn: QToolButton
-    next_image_btn: QToolButton
-    previous_image_btn: QToolButton
-    menubar_spacer: QSpacerItem
+    content_bar: QFrame
+    content_bar_layout: QVBoxLayout
+    # open_file_btn: QToolButton
+    # open_dataset_btn: QToolButton
+    # next_image_btn: QToolButton
+    # previous_image_btn: QToolButton
+    content_bar_spacer: QSpacerItem
     content: QLabel
 
     def setup_ui(self, Helix: QMainWindow) -> None:
@@ -455,120 +515,120 @@ class Ui_Helix(object):
         self.main_content_layout.setObjectName("main_content_layout")
         self.main_content_layout.setSpacing(0)
 
-        # Create the menubar
-        self.menubar = QFrame(self.main_content)
-        self.menubar.setFrameShadow(QFrame.Raised)
-        self.menubar.setFrameShape(QFrame.StyledPanel)
-        self.menubar.setObjectName("menubar")
+        # Create the content_bar
+        self.content_bar = QFrame(self.main_content)
+        self.content_bar.setFrameShadow(QFrame.Raised)
+        self.content_bar.setFrameShape(QFrame.StyledPanel)
+        self.content_bar.setObjectName("content_bar")
 
         size_policy = QSizePolicy(
             QSizePolicy.Preferred,
             QSizePolicy.Preferred
         )
         size_policy.setHorizontalStretch(1)
-        size_policy.setHeightForWidth(self.menubar.sizePolicy().hasHeightForWidth())
+        size_policy.setHeightForWidth(self.content_bar.sizePolicy().hasHeightForWidth())
         size_policy.setVerticalStretch(0)
 
-        self.menubar.setSizePolicy(size_policy)
+        self.content_bar.setSizePolicy(size_policy)
 
-        # Create the menubar layout
-        self.menubar_layout = QVBoxLayout(self.menubar)
-        self.menubar_layout.setObjectName("menubar_layout")
+        # Create the content_bar layout
+        self.content_bar_layout = QVBoxLayout(self.content_bar)
+        self.content_bar_layout.setObjectName("content_bar_layout")
 
         # Create the open single file btn
-        self.open_file_btn = QToolButton(self.menubar)
-        self.open_file_btn.setAutoRaise(False)
-        self.open_file_btn.setEnabled(False)
+        # self.open_file_btn = QToolButton(self.content_bar)
+        # self.open_file_btn.setAutoRaise(False)
+        # self.open_file_btn.setEnabled(False)
 
-        font = QFont()
-        font.setFamilies("Segoe UI")
-        font.setPointSize(10)
+        # font = QFont()
+        # font.setFamilies("Segoe UI")
+        # font.setPointSize(10)
 
-        self.open_file_btn.setFont(font)
+        # self.open_file_btn.setFont(font)
 
-        icon = QIcon()
-        icon.addPixmap(
-            QPixmap(":/images/images/open_file_icon_sml.png"),
-            QIcon.Normal,
-            QIcon.Off
-        )
+        # icon = QIcon()
+        # icon.addPixmap(
+        #     QPixmap(":/images/images/open_file_icon_sml.png"),
+        #     QIcon.Normal,
+        #     QIcon.Off
+        # )
 
-        self.open_file_btn.setIcon(icon)
-        self.open_file_btn.setIconSize(QSize(60, 60))
-        self.open_file_btn.setObjectName("open_file_btn")
-        self.open_file_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        # self.open_file_btn.setIcon(icon)
+        # self.open_file_btn.setIconSize(QSize(60, 60))
+        # # self.open_file_btn.setObjectName("open_file_btn")
+        # self.open_file_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
 
         # Create the open dataset btn
-        self.open_dataset_btn = QToolButton(self.menubar)
-        self.open_dataset_btn.setAutoRaise(False)
-        self.open_dataset_btn.setEnabled(False)
+        # self.open_dataset_btn = QToolButton(self.content_bar)
+        # self.open_dataset_btn.setAutoRaise(False)
+        # self.open_dataset_btn.setEnabled(False)
 
-        font = QFont()
-        font.setFamilies("Segoe UI")
-        font.setPointSize(10)
+        # font = QFont()
+        # font.setFamilies("Segoe UI")
+        # font.setPointSize(10)
 
-        self.open_dataset_btn.setFont(font)
+        # self.open_dataset_btn.setFont(font)
 
-        icon = QIcon()
-        icon.addPixmap(
-            QPixmap(":/images/images/open_directory_icon_sml.png"),
-            QIcon.Normal,
-            QIcon.Off
-        )
+        # icon = QIcon()
+        # icon.addPixmap(
+        #     QPixmap(":/images/images/open_directory_icon_sml.png"),
+        #     QIcon.Normal,
+        #     QIcon.Off
+        # )
 
-        self.open_dataset_btn.setIcon(icon)
-        self.open_dataset_btn.setIconSize(QSize(60, 60))
-        self.open_dataset_btn.setObjectName("open_dataset_btn")
-        self.open_dataset_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        # self.open_dataset_btn.setIcon(icon)
+        # self.open_dataset_btn.setIconSize(QSize(60, 60))
+        # # self.open_dataset_btn.setObjectName("open_dataset_btn")
+        # self.open_dataset_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
 
         # Create the next image btn
-        self.next_image_btn = QToolButton(self.menubar)
-        self.next_image_btn.setAutoRaise(False)
-        self.next_image_btn.setEnabled(False)
+        # self.next_image_btn = QToolButton(self.content_bar)
+        # self.next_image_btn.setAutoRaise(False)
+        # self.next_image_btn.setEnabled(False)
 
-        font = QFont()
-        font.setFamilies("Segoe UI")
-        font.setPointSize(10)
+        # font = QFont()
+        # font.setFamilies("Segoe UI")
+        # font.setPointSize(10)
 
-        self.next_image_btn.setFont(font)
+        # self.next_image_btn.setFont(font)
 
-        icon = QIcon()
-        icon.addPixmap(
-            QPixmap(":/images/images/arrow_right_sml.png"),
-            QIcon.Normal,
-            QIcon.Off
-        )
+        # icon = QIcon()
+        # icon.addPixmap(
+        #     QPixmap(":/images/images/arrow_right_sml.png"),
+        #     QIcon.Normal,
+        #     QIcon.Off
+        # )
 
-        self.next_image_btn.setIcon(icon)
-        self.next_image_btn.setIconSize(QSize(60, 60))
-        self.next_image_btn.setObjectName("next_image_btn")
-        self.next_image_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        # self.next_image_btn.setIcon(icon)
+        # self.next_image_btn.setIconSize(QSize(60, 60))
+        # # self.next_image_btn.setObjectName("next_image_btn")
+        # self.next_image_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
 
         # Create the previous image btn
-        self.previous_image_btn = QToolButton(self.menubar)
-        self.previous_image_btn.setAutoRaise(False)
-        self.previous_image_btn.setEnabled(False)
+        # self.previous_image_btn = QToolButton(self.content_bar)
+        # self.previous_image_btn.setAutoRaise(False)
+        # self.previous_image_btn.setEnabled(False)
 
-        font = QFont()
-        font.setFamilies("Segoe UI")
-        font.setPointSize(10)
+        # font = QFont()
+        # font.setFamilies("Segoe UI")
+        # font.setPointSize(10)
 
-        self.previous_image_btn.setFont(font)
+        # self.previous_image_btn.setFont(font)
 
-        icon = QIcon()
-        icon.addPixmap(
-            QPixmap(":/images/images/arrow_left_sml.png"),
-            QIcon.Normal,
-            QIcon.Off
-        )
+        # icon = QIcon()
+        # icon.addPixmap(
+        #     QPixmap(":/images/images/arrow_left_sml.png"),
+        #     QIcon.Normal,
+        #     QIcon.Off
+        # )
 
-        self.previous_image_btn.setIcon(icon)
-        self.previous_image_btn.setIconSize(QSize(60, 60))
-        self.previous_image_btn.setObjectName("previous_image_btn")
-        self.previous_image_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        # self.previous_image_btn.setIcon(icon)
+        # self.previous_image_btn.setIconSize(QSize(60, 60))
+        # # self.previous_image_btn.setObjectName("previous_image_btn")
+        # self.previous_image_btn.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
 
-        # Create the menubar spacer
-        self.menubar_spacer = QSpacerItem(
+        # Create the content_bar spacer
+        self.content_bar_spacer = QSpacerItem(
             40,
             20,
             QSizePolicy.Expanding,
@@ -598,15 +658,15 @@ class Ui_Helix(object):
 
         self.content.setSizePolicy(size_policy)
 
-        # Add the widgets to the menubar layout
-        self.menubar_layout.addWidget(self.open_file_btn)
-        self.menubar_layout.addWidget(self.open_dataset_btn)
-        self.menubar_layout.addWidget(self.next_image_btn)
-        self.menubar_layout.addWidget(self.previous_image_btn)
-        self.menubar_layout.addWidget(self.menubar_spacer)
+        # Add the widgets to the content_bar layout
+        # self.content_bar_layout.addWidget(self.open_file_btn)
+        # self.content_bar_layout.addWidget(self.open_dataset_btn)
+        # self.content_bar_layout.addWidget(self.next_image_btn)
+        # self.content_bar_layout.addWidget(self.previous_image_btn)
+        self.content_bar_layout.addWidget(self.content_bar_spacer)
 
         # Add the widgets to the main content layout
-        self.main_content_layout.addWidget(self.menubar)
+        self.main_content_layout.addWidget(self.content_bar)
         self.main_content_layout.addWidget(self.content)
 
         # Add the main content container to the central layout
@@ -621,14 +681,14 @@ class Ui_Helix(object):
         Helix.setWindowTitle(_translate("Helix", "Helix"))
         self.helix_logo_text.setText(_translate("Helix", "HELIX"))
         self.close_btn.setText(_translate("Helix", "X"))
-        self.open_file_btn.setShortcut(_translate("Helix", "Ctrl+O"))
-        self.open_file_btn.setText(_translate("Helix", "Open Single File\n(Ctrl + O)"))
-        self.open_dataset_btn.setShortcut(_translate("Helix", "Ctrl+Shift+O"))
-        self.open_dataset_btn.setText(
-            _translate("Helix", "Open Dataset Directory\n(Ctrl + Shift + O)")
-        )
-        self.next_image_btn.setShortcut(_translate("Helix", "d"))
-        self.next_image_btn.setText(_translate("Helix", "Next Image (d)"))
-        self.previous_image_btn.setShortcut(_translate("Helix", "a"))
-        self.previous_image_btn.setText(_translate("Helix", "Previous Image (a)"))
-        self.content.setText(_translate("Helix", "CHOOSE A DATASET"))
+        # self.open_file_btn.setShortcut(_translate("Helix", "Ctrl+O"))
+        # self.open_file_btn.setText(_translate("Helix", "Open Single File\n(Ctrl + O)"))
+        # self.open_dataset_btn.setShortcut(_translate("Helix", "Ctrl+Shift+O"))
+        # self.open_dataset_btn.setText(
+        #     _translate("Helix", "Open Dataset Directory\n(Ctrl + Shift + O)")
+        # )
+        # self.next_image_btn.setShortcut(_translate("Helix", "d"))
+        # self.next_image_btn.setText(_translate("Helix", "Next Image (d)"))
+        # self.previous_image_btn.setShortcut(_translate("Helix", "a"))
+        # self.previous_image_btn.setText(_translate("Helix", "Previous Image (a)"))
+        self.content.setText(_translate("Helix", "THIS DEFAULT CONTENT WINDOW SHOULD BE REPLACED."))
