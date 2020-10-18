@@ -598,7 +598,9 @@ class Ui_Helix(object):
         self.open_file_btn.setShortcut(_translate("Helix", "Ctrl+O"))
         self.open_file_btn.setText(_translate("Helix", "Open Single File\n(Ctrl + O)"))
         self.open_dataset_btn.setShortcut(_translate("Helix", "Ctrl+Shift+O"))
-        self.open_dataset_btn.setText(_translate("Helix", "Open Dataset Directory\n(Ctrl + Shift + O)"))
+        self.open_dataset_btn.setText(
+            _translate("Helix", "Open Dataset Directory\n(Ctrl + Shift + O)")
+        )
         self.next_image_btn.setShortcut(_translate("Helix", "d"))
         self.next_image_btn.setText(_translate("Helix", "Next Image (d)"))
         self.previous_image_btn.setShortcut(_translate("Helix", "a"))
