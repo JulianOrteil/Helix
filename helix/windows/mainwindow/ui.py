@@ -17,7 +17,16 @@
 # * limitations under the License.
 # **********************************************************************
 
-"""Builds the base window of the application."""
+"""Builds the main window of the application.
+
+'Ui_Helix' is the builder class and is meant to be inherited before a
+window type. Importing everything from this module will only present the
+builder class (as defined by the '__all__' attribute).
+
+Example Usage:
+    >>> class Window(Ui_Helix, QMainWindow):
+    >>>     ...
+"""
 
 
 from __future__ import absolute_import
@@ -79,6 +88,23 @@ class Ui_Helix(object):
     content: QLabel
 
     def setup_ui(self, Helix: QMainWindow) -> None:
+        """Builds the widgets for the window.
+
+        Args:
+            Helix (:obj:`QMainWindow`):
+                The child window inheriting this builder class. The
+                child will hold the references to every widget built in
+                this class.
+
+        Example Usage:
+            >>> class Window(Ui_Helix, QMainWindow):
+            ...
+            ...     def __init__(self) -> None:
+            ...         super().__init__()
+            ...
+            ...         self.setup_ui(self)
+        """
+
         # Create base window
         Helix.resize(1920, 1080)
         Helix.setMinimumSize(QSize(800, 600))
