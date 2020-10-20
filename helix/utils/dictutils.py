@@ -89,12 +89,6 @@ class Maps(MutableMapping):
 
         Output: Maps(hello_joh_n="hi computer")
 
-    Args:
-        args:
-            A list.
-        kwargs:
-            A dictionary.
-
     Raises:
         ValueError:
             An argument is of a legal type but is, or contains, an
@@ -123,8 +117,10 @@ class Maps(MutableMapping):
             dictionary = args[0]
 
             if not isinstance(dictionary, dict):
-                raise ValueError("object passed to constructor must be of type 'dict': " \
-                                f"'{type(dictionary).__name__}'")
+                raise ValueError(
+                    "object passed to constructor must be of type 'dict': "
+                    f"'{type(dictionary).__name__}'"
+                )
 
             # Recursive handling
             tracked_ids = {id(dictionary): self}
@@ -150,7 +146,18 @@ class Maps(MutableMapping):
                         listed_items.append(temp_item)
 
                     value = listed_items
-                self._map[key] = value
+                try:
+                    self._map[key] = eval(value)
+                except NameError:
+                    if value.lower() == "false":
+                        self._map[key] = False
+                    elif value.lower() == "true":
+                        self._map[key] = True
+                    else:
+                        self._map[key] = value
+                except SyntaxError:
+                    # Cannot eval this value
+                    pass
 
     # Dunder methods
 
@@ -438,7 +445,6 @@ class Maps(MutableMapping):
 
         for key, value in ini_dict.items():
             if isinstance(value, dict):
-
                 # Recursively parse dict
                 ini_dict[key] = Maps.parse_ini(value, to_maps=to_maps)
             else:
