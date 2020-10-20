@@ -156,9 +156,9 @@ class Maps(MutableMapping):
                         self._map[key] = True
                     else:
                         self._map[key] = value
-                except SyntaxError:
+                except (SyntaxError, ValueError):
                     # Cannot eval this value
-                    pass
+                    self._map[key] = value
 
     # Dunder methods
 
@@ -464,9 +464,11 @@ class Maps(MutableMapping):
                         ini_dict[key] = False
                     elif value.lower() == "true":
                         ini_dict[key] = True
-                except SyntaxError:
+                    else:
+                        ini_dict[key] = value
+                except (SyntaxError, ValueError):
                     # Cannot eval this value
-                    pass
+                    ini_dict[key] = value
         return Maps(ini_dict) if to_maps else ini_dict
 
     @classmethod
