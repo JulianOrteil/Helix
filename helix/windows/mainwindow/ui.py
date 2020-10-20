@@ -20,7 +20,7 @@
 """Builds the main window of the application.
 
 'Ui_Helix' is the builder class and is meant to be inherited before a
-window type. Importing everything from this module will only present the
+window type. Importing everything from this module will only import the
 builder class (as defined by the '__all__' attribute).
 
 Example Usage:
