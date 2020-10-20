@@ -41,6 +41,7 @@ from __future__ import print_function
 __all__ = ["Maps"]
 
 
+import ast
 import os
 import re
 from collections import OrderedDict
@@ -147,7 +148,7 @@ class Maps(MutableMapping):
 
                     value = listed_items
                 try:
-                    self._map[key] = eval(value)
+                    self._map[key] = ast.literal_eval(value)
                 except NameError:
                     if value.lower() == "false":
                         self._map[key] = False
@@ -260,7 +261,11 @@ class Maps(MutableMapping):
             self[name] = value
 
     def __getitem__(self, name: str) -> Union[Any, Maps]:
-        if name not in self._map and self._dynamic and name != "_ipython_canary_method_should_not_exist_":
+        if (
+            name not in self._map and
+            self._dynamic and
+            name != "_ipython_canary_method_should_not_exist_"
+        ):
             self[name] = self.__class__()
 
         return self._map[name]
@@ -415,8 +420,10 @@ class Maps(MutableMapping):
         # to be a dict when the function recursively converts the values
         # from a ConfigParser
         if not isinstance(ini_dict, (dict, ConfigParser)):
-            raise TypeError("argument 'ini_dict' must be of type 'ConfigParser': " \
-                            f"{type(ini_dict).__name__}")
+            raise TypeError(
+                "argument 'ini_dict' must be of type 'ConfigParser': "
+                f"{type(ini_dict).__name__}"
+            )
         if isinstance(ini_dict, ConfigParser):
             ini_dict_ = {}
             for section in ini_dict.sections():
@@ -451,7 +458,7 @@ class Maps(MutableMapping):
                 if not isinstance(value, str):
                     continue
                 try:
-                    ini_dict[key] = eval(value)
+                    ini_dict[key] = ast.literal_eval(value)
                 except NameError:
                     if value.lower() == "false":
                         ini_dict[key] = False
